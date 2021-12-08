@@ -1,0 +1,51 @@
+#!/bin/sh
+
+
+usage(){
+   echo "$0 <CONTAINER> [-x] -d <dynamically linked> -f <files and dirs> -r <files to remove> -u user <files to chown to user>" 
+   exit 1
+}
+
+#
+# create the tar command to be run in the container
+# the arguments to tar are defined by the extract command
+#
+# this command is running IN the container and is defined
+# in extract_function.sh
+#
+create_tar_command(){
+  cat extract_function.sh
+  echo tar cf /dev/stdout -C / \$\(extract  $* \) 
+}
+
+#
+# creates a Dockerfile inspecting the running container
+#
+create_dockerfile(){
+
+  echo FROM scratch
+
+  echo ADD ${CONTAINER}-hard.tar /
+
+  docker inspect static   -f '{{range $k, $v := .Config.ExposedPorts}}{{printf "EXPOSE %s\n" $k}}{{end}}' | cut -d/ -f1
+
+  #docker inspect --format "USER {{.Config.User}}"  static | cut -d: -f1
+
+  docker inspect --format "WORKDIR {{.Config.WorkingDir}}" $CONTAINER
+  docker inspect --format "ENTRYPOINT {{json .Config.Entrypoint}}"  $CONTAINER
+}
+
+if [ "$#" -eq "0" ] 
+then 
+  usage 
+  exit 1
+fi
+
+CONTAINER=$1
+shift
+
+create_tar_command $* |  docker exec -i  $CONTAINER sh > $${CONTAINER}-hard.tar
+
+create_dockerfile   > Dockerfile-${CONTAINER}-hard
+
+docker build . -f Dockerfile-${CONTAINER}-hard -t ${CONTAINER}-hard
