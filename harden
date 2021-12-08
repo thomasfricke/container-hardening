@@ -44,7 +44,7 @@ fi
 CONTAINER=$1
 shift
 
-create_tar_command $* |  docker exec -i  $CONTAINER sh > $${CONTAINER}-hard.tar
+create_tar_command $* |  docker exec -i  $CONTAINER sh > ${CONTAINER}-hard.tar
 
 create_dockerfile   > Dockerfile-${CONTAINER}-hard
 

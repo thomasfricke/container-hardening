@@ -77,7 +77,7 @@ extract(){
       ;;
 
     -u)  # change owner and grand access    
-    
+      shift
       OWNER=$1
       shift
       while next_section $*
