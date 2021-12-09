@@ -43,10 +43,10 @@ git clone https://github.com/thomasfricke/container-hardening.git
 ```
 
     Klone nach 'container-hardening' ...
-    remote: Enumerating objects: 7, done.
-    remote: Counting objects: 100% (7/7), done.
-    remote: Compressing objects: 100% (7/7), done.
-    remote: Total 7 (delta 0), reused 4 (delta 0), pack-reused 0
+    remote: Enumerating objects: 7, done.[K
+    remote: Counting objects: 100% (7/7), done.[K
+    remote: Compressing objects: 100% (7/7), done.[K
+    remote: Total 7 (delta 0), reused 4 (delta 0), pack-reused 0[K
     Entpacke Objekte: 100% (7/7), 2.11 KiB | 1.05 MiB/s, fertig.
 
 
@@ -262,8 +262,8 @@ docker build . -t extract-hard -f Dockerfile-extract-hard
 docker images | head -2
 ```
 
-    REPOSITORY                                                TAG                                        IMAGE ID       CREATED          SIZE
-    extract-hard                                              latest                                     d19cb6d84354   15 seconds ago   8.39MB
+    REPOSITORY                                                TAG                                        IMAGE ID       CREATED         SIZE
+    extract-hard                                              latest                                     d19cb6d84354   4 hours ago     8.39MB
 
 
 
@@ -293,18 +293,12 @@ docker logs extract-hard
 
 
 ```bash
-docker ps
+docker ps | head -3
 ```
 
-    CONTAINER ID   IMAGE                                 COMMAND                  CREATED         STATUS         PORTS                                                                                                                                  NAMES
-    606f1dc93b4a   extract-hard                          "/usr/sbin/nginx -g …"   4 seconds ago   Up 3 seconds   3000/tcp, 0.0.0.0:10080->80/tcp, :::10080->80/tcp                                                                                      extract-hard
-    3c91c58ca434   nginx:alpine                          "/docker-entrypoint.…"   17 hours ago    Up 17 hours    80/tcp                                                                                                                                 extract
-    53e05bb5b2d7   static-hard                           "/usr/sbin/nginx -g …"   20 hours ago    Up 20 hours    80/tcp, 0.0.0.0:3000->3000/tcp, :::3000->3000/tcp                                                                                      static-hard
-    2dd9501edf6e   alpine                                "ash -c 'apk add soc…"   12 days ago     Up 12 days                                                                                                                                            socat
-    214d5932f7e6   gcr.io/k8s-minikube/kicbase:v0.0.27   "/usr/local/bin/entr…"   3 weeks ago     Up 3 weeks     127.0.0.1:49207->22/tcp, 127.0.0.1:49206->2376/tcp, 127.0.0.1:49205->5000/tcp, 127.0.0.1:49204->8443/tcp, 127.0.0.1:49203->32443/tcp   minikube
-    ac5efb4cac7a   quay.io/keycloak/keycloak:15.0.2      "/opt/jboss/tools/do…"   5 weeks ago     Up 5 weeks     0.0.0.0:8080->8080/tcp, :::8080->8080/tcp, 8443/tcp                                                                                    keycloak
-    ad25cd956739   brave:latest                          "/bin/sh -c /run.sh"     7 weeks ago     Up 7 days                                                                                                                                             brave-denmark
-    e1f809783d3e   openvpn:latest                        "/run.sh"                6 months ago    Up 4 weeks                                                                                                                                            openvpn-denmark
+    CONTAINER ID   IMAGE                                 COMMAND                  CREATED        STATUS        PORTS                                                                                                                                  NAMES
+    606f1dc93b4a   extract-hard                          "/usr/sbin/nginx -g …"   4 hours ago    Up 4 hours    3000/tcp, 0.0.0.0:10080->80/tcp, :::10080->80/tcp                                                                                      extract-hard
+    3c91c58ca434   nginx:alpine                          "/docker-entrypoint.…"   21 hours ago   Up 21 hours   80/tcp                                                                                                                                 extract
 
 
 
@@ -700,6 +694,90 @@ docker inspect extract-hard | jq
         }
       }
     ]
+
+
+# Debugging 
+
+Debugging a hardened container is possible. 
+
+- using `nsenter`, Linux only
+- using another container in the same network namespace
+
+## `nsenter` version
+
+
+```bash
+PID=$(docker inspect --format "{{.State.Pid}}"  extract-hard)
+echo $PID
+```
+
+    3029366
+
+
+
+```bash
+sudo nsenter -t $PID -n curl localhost:80
+```
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Welcome to nginx!</title>
+    <style>
+        body {
+            width: 35em;
+            margin: 0 auto;
+            font-family: Tahoma, Verdana, Arial, sans-serif;
+        }
+    </style>
+    </head>
+    <body>
+    <h1>Welcome to nginx!</h1>
+    <p>If you see this page, the nginx web server is successfully installed and
+    working. Further configuration is required.</p>
+    
+    <p>For online documentation and support please refer to
+    <a href="http://nginx.org/">nginx.org</a>.<br/>
+    Commercial support is available at
+    <a href="http://nginx.com/">nginx.com</a>.</p>
+    
+    <p><em>Thank you for using nginx.</em></p>
+    </body>
+    </html>
+
+
+## docker network version
+
+
+```bash
+docker run --rm --network=container:extract-hard nginx:alpine curl -s localhost:80
+```
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Welcome to nginx!</title>
+    <style>
+        body {
+            width: 35em;
+            margin: 0 auto;
+            font-family: Tahoma, Verdana, Arial, sans-serif;
+        }
+    </style>
+    </head>
+    <body>
+    <h1>Welcome to nginx!</h1>
+    <p>If you see this page, the nginx web server is successfully installed and
+    working. Further configuration is required.</p>
+    
+    <p>For online documentation and support please refer to
+    <a href="http://nginx.org/">nginx.org</a>.<br/>
+    Commercial support is available at
+    <a href="http://nginx.com/">nginx.com</a>.</p>
+    
+    <p><em>Thank you for using nginx.</em></p>
+    </body>
+    </html>
 
 
 
