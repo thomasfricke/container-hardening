@@ -69,14 +69,16 @@ cd container-hardening
 
 
 ```bash
-ls -Fl
+ls -Fl 
 ```
 
-    .[1;33mr[31mw[0m[38;5;244m-[33mr[31mw[38;5;244m-[33mr[38;5;244m--[0m  [1;32m33[0m[32mk[0m [1;33mthomas[0m [34m 9 Dez 11:11[0m Example-NGinx-Alpine-Hardening.md
-    .[1;33mr[31mw[4;32mx[0m[33mr[31mw[32mx[33mr[38;5;244m-[32mx[0m [1;32m1,5[0m[32mk[0m [1;33mthomas[0m [34m 8 Dez 19:30[0m [1;32mextract_function.sh[0m*
-    .[1;33mr[31mw[4;32mx[0m[33mr[31mw[32mx[33mr[38;5;244m-[32mx[0m [1;32m1,5[0m[32mk[0m [1;33mthomas[0m [34m 9 Dez 11:07[0m [1;32mharden[0m*
-    .[1;33mr[31mw[0m[38;5;244m-[33mr[31mw[38;5;244m-[33mr[38;5;244m--[0m [1;32m2,4[0m[32mk[0m [1;33mthomas[0m [34m 9 Dez 11:01[0m License.md
-    .[1;33mr[31mw[0m[38;5;244m-[33mr[31mw[38;5;244m-[33mr[38;5;244m--[0m   [1;32m61[0m [1;33mthomas[0m [34m 8 Dez 19:23[0m [1;4;33mREADME.md[0m
+    .rw-rw-r--  109 thomas  9 Dez 12:07 Dockerfile-extract-hard
+    .rw-rw-r--  35k thomas  9 Dez 12:25 Example-NGinx-Alpine-Hardening.md
+    .rw-rw-r-- 9,1M thomas  9 Dez 12:07 extract-hard.tar
+    .rwxrwxr-x 1,5k thomas  8 Dez 19:30 extract_function.sh*
+    .rwxrwxr-x 2,1k thomas  9 Dez 11:36 harden*
+    .rw-rw-r-- 2,4k thomas  9 Dez 11:01 License.md
+    .rw-rw-r--   61 thomas  8 Dez 19:23 README.md
 
 
 less than **60 files** are nginx related, compared to more than **1700 files** in the entire image
@@ -86,65 +88,65 @@ less than **60 files** are nginx related, compared to more than **1700 files** i
 docker exec -it extract find / | grep nginx 
 ```
 
-    /usr/sbin/[01;31m[Knginx[m[K
-    /usr/sbin/[01;31m[Knginx[m[K-debug
-    /usr/share/man/man8/[01;31m[Knginx[m[K.8.gz
-    /usr/share/[01;31m[Knginx[m[K
-    /usr/share/[01;31m[Knginx[m[K/html
-    /usr/share/[01;31m[Knginx[m[K/html/50x.html
-    /usr/share/[01;31m[Knginx[m[K/html/index.html
-    /usr/share/doc/[01;31m[Knginx[m[K-module-njs
-    /usr/share/doc/[01;31m[Knginx[m[K-module-njs/CHANGES
-    /usr/share/licenses/[01;31m[Knginx[m[K-module-image-filter
-    /usr/share/licenses/[01;31m[Knginx[m[K-module-image-filter/COPYRIGHT
-    /usr/share/licenses/[01;31m[Knginx[m[K
-    /usr/share/licenses/[01;31m[Knginx[m[K/COPYRIGHT
-    /usr/share/licenses/[01;31m[Knginx[m[K-module-xslt
-    /usr/share/licenses/[01;31m[Knginx[m[K-module-xslt/COPYRIGHT
-    /usr/share/licenses/[01;31m[Knginx[m[K-module-geoip
-    /usr/share/licenses/[01;31m[Knginx[m[K-module-geoip/COPYRIGHT
-    /usr/share/licenses/[01;31m[Knginx[m[K-module-njs
-    /usr/share/licenses/[01;31m[Knginx[m[K-module-njs/COPYRIGHT
-    /usr/lib/[01;31m[Knginx[m[K
-    /usr/lib/[01;31m[Knginx[m[K/modules
-    /usr/lib/[01;31m[Knginx[m[K/modules/ngx_stream_geoip_module.so
-    /usr/lib/[01;31m[Knginx[m[K/modules/ngx_stream_js_module-debug.so
-    /usr/lib/[01;31m[Knginx[m[K/modules/ngx_http_image_filter_module.so
-    /usr/lib/[01;31m[Knginx[m[K/modules/ngx_stream_geoip_module-debug.so
-    /usr/lib/[01;31m[Knginx[m[K/modules/ngx_http_js_module.so
-    /usr/lib/[01;31m[Knginx[m[K/modules/ngx_http_xslt_filter_module-debug.so
-    /usr/lib/[01;31m[Knginx[m[K/modules/ngx_http_xslt_filter_module.so
-    /usr/lib/[01;31m[Knginx[m[K/modules/ngx_http_geoip_module.so
-    /usr/lib/[01;31m[Knginx[m[K/modules/ngx_http_js_module-debug.so
-    /usr/lib/[01;31m[Knginx[m[K/modules/ngx_http_geoip_module-debug.so
-    /usr/lib/[01;31m[Knginx[m[K/modules/ngx_http_image_filter_module-debug.so
-    /usr/lib/[01;31m[Knginx[m[K/modules/ngx_stream_js_module.so
-    /etc/init.d/[01;31m[Knginx[m[K
-    /etc/init.d/[01;31m[Knginx[m[K-debug
-    /etc/logrotate.d/[01;31m[Knginx[m[K
-    /etc/[01;31m[Knginx[m[K
-    /etc/[01;31m[Knginx[m[K/scgi_params
-    /etc/[01;31m[Knginx[m[K/conf.d
-    /etc/[01;31m[Knginx[m[K/conf.d/default.conf
-    /etc/[01;31m[Knginx[m[K/[01;31m[Knginx[m[K.conf
-    /etc/[01;31m[Knginx[m[K/koi-win
-    /etc/[01;31m[Knginx[m[K/win-utf
-    /etc/[01;31m[Knginx[m[K/modules
-    /etc/[01;31m[Knginx[m[K/koi-utf
-    /etc/[01;31m[Knginx[m[K/uwsgi_params
-    /etc/[01;31m[Knginx[m[K/fastcgi_params
-    /etc/[01;31m[Knginx[m[K/fastcgi.conf
-    /etc/[01;31m[Knginx[m[K/mime.types
-    /run/[01;31m[Knginx[m[K.pid
-    /var/cache/[01;31m[Knginx[m[K
-    /var/cache/[01;31m[Knginx[m[K/client_temp
-    /var/cache/[01;31m[Knginx[m[K/uwsgi_temp
-    /var/cache/[01;31m[Knginx[m[K/fastcgi_temp
-    /var/cache/[01;31m[Knginx[m[K/scgi_temp
-    /var/cache/[01;31m[Knginx[m[K/proxy_temp
-    /var/log/[01;31m[Knginx[m[K
-    /var/log/[01;31m[Knginx[m[K/error.log
-    /var/log/[01;31m[Knginx[m[K/access.log
+    /usr/sbin/nginx
+    /usr/sbin/nginx-debug
+    /usr/share/man/man8/nginx.8.gz
+    /usr/share/nginx
+    /usr/share/nginx/html
+    /usr/share/nginx/html/50x.html
+    /usr/share/nginx/html/index.html
+    /usr/share/doc/nginx-module-njs
+    /usr/share/doc/nginx-module-njs/CHANGES
+    /usr/share/licenses/nginx-module-image-filter
+    /usr/share/licenses/nginx-module-image-filter/COPYRIGHT
+    /usr/share/licenses/nginx
+    /usr/share/licenses/nginx/COPYRIGHT
+    /usr/share/licenses/nginx-module-xslt
+    /usr/share/licenses/nginx-module-xslt/COPYRIGHT
+    /usr/share/licenses/nginx-module-geoip
+    /usr/share/licenses/nginx-module-geoip/COPYRIGHT
+    /usr/share/licenses/nginx-module-njs
+    /usr/share/licenses/nginx-module-njs/COPYRIGHT
+    /usr/lib/nginx
+    /usr/lib/nginx/modules
+    /usr/lib/nginx/modules/ngx_stream_geoip_module.so
+    /usr/lib/nginx/modules/ngx_stream_js_module-debug.so
+    /usr/lib/nginx/modules/ngx_http_image_filter_module.so
+    /usr/lib/nginx/modules/ngx_stream_geoip_module-debug.so
+    /usr/lib/nginx/modules/ngx_http_js_module.so
+    /usr/lib/nginx/modules/ngx_http_xslt_filter_module-debug.so
+    /usr/lib/nginx/modules/ngx_http_xslt_filter_module.so
+    /usr/lib/nginx/modules/ngx_http_geoip_module.so
+    /usr/lib/nginx/modules/ngx_http_js_module-debug.so
+    /usr/lib/nginx/modules/ngx_http_geoip_module-debug.so
+    /usr/lib/nginx/modules/ngx_http_image_filter_module-debug.so
+    /usr/lib/nginx/modules/ngx_stream_js_module.so
+    /etc/init.d/nginx
+    /etc/init.d/nginx-debug
+    /etc/logrotate.d/nginx
+    /etc/nginx
+    /etc/nginx/scgi_params
+    /etc/nginx/conf.d
+    /etc/nginx/conf.d/default.conf
+    /etc/nginx/nginx.conf
+    /etc/nginx/koi-win
+    /etc/nginx/win-utf
+    /etc/nginx/modules
+    /etc/nginx/koi-utf
+    /etc/nginx/uwsgi_params
+    /etc/nginx/fastcgi_params
+    /etc/nginx/fastcgi.conf
+    /etc/nginx/mime.types
+    /run/nginx.pid
+    /var/cache/nginx
+    /var/cache/nginx/client_temp
+    /var/cache/nginx/uwsgi_temp
+    /var/cache/nginx/fastcgi_temp
+    /var/cache/nginx/scgi_temp
+    /var/cache/nginx/proxy_temp
+    /var/log/nginx
+    /var/log/nginx/error.log
+    /var/log/nginx/access.log
 
 
 # the **`harden`** script
@@ -371,102 +373,102 @@ tar tf extract-hard.tar | grep -E '(^|.*nginx.*)'
     lib/libz.so.1
     lib/libz.so.1.2.11
     lib/ld-musl-x86_64.so.1
-    [01;31m[Kusr/sbin/nginx[m[K
-    [01;31m[Ketc/nginx/[m[K
-    [01;31m[Ketc/nginx/scgi_params[m[K
-    [01;31m[Ketc/nginx/conf.d/[m[K
-    [01;31m[Ketc/nginx/conf.d/default.conf[m[K
-    [01;31m[Ketc/nginx/nginx.conf[m[K
-    [01;31m[Ketc/nginx/koi-win[m[K
-    [01;31m[Ketc/nginx/win-utf[m[K
-    [01;31m[Ketc/nginx/modules[m[K
-    [01;31m[Ketc/nginx/koi-utf[m[K
-    [01;31m[Ketc/nginx/uwsgi_params[m[K
-    [01;31m[Ketc/nginx/fastcgi_params[m[K
-    [01;31m[Ketc/nginx/fastcgi.conf[m[K
-    [01;31m[Ketc/nginx/mime.types[m[K
-    [01;31m[Ketc/nginx/scgi_params[m[K
-    [01;31m[Ketc/nginx/conf.d/[m[K
-    [01;31m[Ketc/nginx/conf.d/default.conf[m[K
-    [01;31m[Ketc/nginx/conf.d/default.conf[m[K
-    [01;31m[Ketc/nginx/nginx.conf[m[K
-    [01;31m[Ketc/nginx/koi-win[m[K
-    [01;31m[Ketc/nginx/win-utf[m[K
-    [01;31m[Ketc/nginx/modules[m[K
-    [01;31m[Kusr/lib/nginx/modules/[m[K
-    [01;31m[Kusr/lib/nginx/modules/ngx_stream_geoip_module.so[m[K
-    [01;31m[Kusr/lib/nginx/modules/ngx_stream_js_module-debug.so[m[K
-    [01;31m[Kusr/lib/nginx/modules/ngx_http_image_filter_module.so[m[K
-    [01;31m[Kusr/lib/nginx/modules/ngx_stream_geoip_module-debug.so[m[K
-    [01;31m[Kusr/lib/nginx/modules/ngx_http_js_module.so[m[K
-    [01;31m[Kusr/lib/nginx/modules/ngx_http_xslt_filter_module-debug.so[m[K
-    [01;31m[Kusr/lib/nginx/modules/ngx_http_xslt_filter_module.so[m[K
-    [01;31m[Kusr/lib/nginx/modules/ngx_http_geoip_module.so[m[K
-    [01;31m[Kusr/lib/nginx/modules/ngx_http_js_module-debug.so[m[K
-    [01;31m[Kusr/lib/nginx/modules/ngx_http_geoip_module-debug.so[m[K
-    [01;31m[Kusr/lib/nginx/modules/ngx_http_image_filter_module-debug.so[m[K
-    [01;31m[Kusr/lib/nginx/modules/ngx_stream_js_module.so[m[K
-    [01;31m[Ketc/nginx/koi-utf[m[K
-    [01;31m[Ketc/nginx/uwsgi_params[m[K
-    [01;31m[Ketc/nginx/fastcgi_params[m[K
-    [01;31m[Ketc/nginx/fastcgi.conf[m[K
-    [01;31m[Ketc/nginx/mime.types[m[K
-    [01;31m[Kvar/log/nginx/[m[K
-    [01;31m[Kvar/log/nginx/error.log[m[K
-    [01;31m[Kvar/log/nginx/access.log[m[K
-    [01;31m[Kvar/log/nginx/error.log[m[K
+    usr/sbin/nginx
+    etc/nginx/
+    etc/nginx/scgi_params
+    etc/nginx/conf.d/
+    etc/nginx/conf.d/default.conf
+    etc/nginx/nginx.conf
+    etc/nginx/koi-win
+    etc/nginx/win-utf
+    etc/nginx/modules
+    etc/nginx/koi-utf
+    etc/nginx/uwsgi_params
+    etc/nginx/fastcgi_params
+    etc/nginx/fastcgi.conf
+    etc/nginx/mime.types
+    etc/nginx/scgi_params
+    etc/nginx/conf.d/
+    etc/nginx/conf.d/default.conf
+    etc/nginx/conf.d/default.conf
+    etc/nginx/nginx.conf
+    etc/nginx/koi-win
+    etc/nginx/win-utf
+    etc/nginx/modules
+    usr/lib/nginx/modules/
+    usr/lib/nginx/modules/ngx_stream_geoip_module.so
+    usr/lib/nginx/modules/ngx_stream_js_module-debug.so
+    usr/lib/nginx/modules/ngx_http_image_filter_module.so
+    usr/lib/nginx/modules/ngx_stream_geoip_module-debug.so
+    usr/lib/nginx/modules/ngx_http_js_module.so
+    usr/lib/nginx/modules/ngx_http_xslt_filter_module-debug.so
+    usr/lib/nginx/modules/ngx_http_xslt_filter_module.so
+    usr/lib/nginx/modules/ngx_http_geoip_module.so
+    usr/lib/nginx/modules/ngx_http_js_module-debug.so
+    usr/lib/nginx/modules/ngx_http_geoip_module-debug.so
+    usr/lib/nginx/modules/ngx_http_image_filter_module-debug.so
+    usr/lib/nginx/modules/ngx_stream_js_module.so
+    etc/nginx/koi-utf
+    etc/nginx/uwsgi_params
+    etc/nginx/fastcgi_params
+    etc/nginx/fastcgi.conf
+    etc/nginx/mime.types
+    var/log/nginx/
+    var/log/nginx/error.log
+    var/log/nginx/access.log
+    var/log/nginx/error.log
     dev/stderr
-    [01;31m[Kvar/log/nginx/access.log[m[K
+    var/log/nginx/access.log
     dev/stdout
-    [01;31m[Kvar/run/nginx.pid[m[K
-    [01;31m[Kvar/cache/nginx/[m[K
-    [01;31m[Kvar/cache/nginx/client_temp/[m[K
-    [01;31m[Kvar/cache/nginx/uwsgi_temp/[m[K
-    [01;31m[Kvar/cache/nginx/fastcgi_temp/[m[K
-    [01;31m[Kvar/cache/nginx/scgi_temp/[m[K
-    [01;31m[Kvar/cache/nginx/proxy_temp/[m[K
-    [01;31m[Kvar/cache/nginx/client_temp/[m[K
-    [01;31m[Kvar/cache/nginx/uwsgi_temp/[m[K
-    [01;31m[Kvar/cache/nginx/fastcgi_temp/[m[K
-    [01;31m[Kvar/cache/nginx/scgi_temp/[m[K
-    [01;31m[Kvar/cache/nginx/proxy_temp/[m[K
+    var/run/nginx.pid
+    var/cache/nginx/
+    var/cache/nginx/client_temp/
+    var/cache/nginx/uwsgi_temp/
+    var/cache/nginx/fastcgi_temp/
+    var/cache/nginx/scgi_temp/
+    var/cache/nginx/proxy_temp/
+    var/cache/nginx/client_temp/
+    var/cache/nginx/uwsgi_temp/
+    var/cache/nginx/fastcgi_temp/
+    var/cache/nginx/scgi_temp/
+    var/cache/nginx/proxy_temp/
     etc/passwd
     etc/group
-    [01;31m[Kusr/share/nginx/[m[K
-    [01;31m[Kusr/share/nginx/html/[m[K
-    [01;31m[Kusr/share/nginx/html/50x.html[m[K
-    [01;31m[Kusr/share/nginx/html/index.html[m[K
-    [01;31m[Kusr/share/nginx/html/[m[K
-    [01;31m[Kusr/share/nginx/html/50x.html[m[K
-    [01;31m[Kusr/share/nginx/html/index.html[m[K
-    [01;31m[Kusr/share/nginx/html/50x.html[m[K
-    [01;31m[Kusr/share/nginx/html/index.html[m[K
+    usr/share/nginx/
+    usr/share/nginx/html/
+    usr/share/nginx/html/50x.html
+    usr/share/nginx/html/index.html
+    usr/share/nginx/html/
+    usr/share/nginx/html/50x.html
+    usr/share/nginx/html/index.html
+    usr/share/nginx/html/50x.html
+    usr/share/nginx/html/index.html
     usr/share/licenses/
-    [01;31m[Kusr/share/licenses/nginx-module-image-filter/[m[K
-    [01;31m[Kusr/share/licenses/nginx-module-image-filter/COPYRIGHT[m[K
-    [01;31m[Kusr/share/licenses/nginx/[m[K
-    [01;31m[Kusr/share/licenses/nginx/COPYRIGHT[m[K
-    [01;31m[Kusr/share/licenses/nginx-module-xslt/[m[K
-    [01;31m[Kusr/share/licenses/nginx-module-xslt/COPYRIGHT[m[K
-    [01;31m[Kusr/share/licenses/nginx-module-geoip/[m[K
-    [01;31m[Kusr/share/licenses/nginx-module-geoip/COPYRIGHT[m[K
-    [01;31m[Kusr/share/licenses/nginx-module-njs/[m[K
-    [01;31m[Kusr/share/licenses/nginx-module-njs/COPYRIGHT[m[K
-    [01;31m[Kusr/share/licenses/nginx-module-image-filter/[m[K
-    [01;31m[Kusr/share/licenses/nginx-module-image-filter/COPYRIGHT[m[K
-    [01;31m[Kusr/share/licenses/nginx-module-image-filter/COPYRIGHT[m[K
-    [01;31m[Kusr/share/licenses/nginx/[m[K
-    [01;31m[Kusr/share/licenses/nginx/COPYRIGHT[m[K
-    [01;31m[Kusr/share/licenses/nginx/COPYRIGHT[m[K
-    [01;31m[Kusr/share/licenses/nginx-module-xslt/[m[K
-    [01;31m[Kusr/share/licenses/nginx-module-xslt/COPYRIGHT[m[K
-    [01;31m[Kusr/share/licenses/nginx-module-xslt/COPYRIGHT[m[K
-    [01;31m[Kusr/share/licenses/nginx-module-geoip/[m[K
-    [01;31m[Kusr/share/licenses/nginx-module-geoip/COPYRIGHT[m[K
-    [01;31m[Kusr/share/licenses/nginx-module-geoip/COPYRIGHT[m[K
-    [01;31m[Kusr/share/licenses/nginx-module-njs/[m[K
-    [01;31m[Kusr/share/licenses/nginx-module-njs/COPYRIGHT[m[K
-    [01;31m[Kusr/share/licenses/nginx-module-njs/COPYRIGHT[m[K
+    usr/share/licenses/nginx-module-image-filter/
+    usr/share/licenses/nginx-module-image-filter/COPYRIGHT
+    usr/share/licenses/nginx/
+    usr/share/licenses/nginx/COPYRIGHT
+    usr/share/licenses/nginx-module-xslt/
+    usr/share/licenses/nginx-module-xslt/COPYRIGHT
+    usr/share/licenses/nginx-module-geoip/
+    usr/share/licenses/nginx-module-geoip/COPYRIGHT
+    usr/share/licenses/nginx-module-njs/
+    usr/share/licenses/nginx-module-njs/COPYRIGHT
+    usr/share/licenses/nginx-module-image-filter/
+    usr/share/licenses/nginx-module-image-filter/COPYRIGHT
+    usr/share/licenses/nginx-module-image-filter/COPYRIGHT
+    usr/share/licenses/nginx/
+    usr/share/licenses/nginx/COPYRIGHT
+    usr/share/licenses/nginx/COPYRIGHT
+    usr/share/licenses/nginx-module-xslt/
+    usr/share/licenses/nginx-module-xslt/COPYRIGHT
+    usr/share/licenses/nginx-module-xslt/COPYRIGHT
+    usr/share/licenses/nginx-module-geoip/
+    usr/share/licenses/nginx-module-geoip/COPYRIGHT
+    usr/share/licenses/nginx-module-geoip/COPYRIGHT
+    usr/share/licenses/nginx-module-njs/
+    usr/share/licenses/nginx-module-njs/COPYRIGHT
+    usr/share/licenses/nginx-module-njs/COPYRIGHT
 
 
 
