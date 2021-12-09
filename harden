@@ -1,5 +1,10 @@
 #!/bin/sh
 
+#
+# License
+#
+# GNU Affero General Public License Version 3.0, https://www.gnu.org/licenses/agpl-3.0.en.html
+#
 
 usage(){
 
@@ -16,6 +21,9 @@ $0 <running container> [-x] -d <dynamically linked> -f <files and dirs> -r <file
       -u User:Group files should be chowned to, access right will be set to rw  
 
 The container needs a usable version of sh, tar, ldd, sed, rm and uniq
+
+      License is
+      GNU Affero General Public License Version 3.0, https://www.gnu.org/licenses/agpl-3.0.en.html
 
 EOF
 

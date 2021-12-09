@@ -43,10 +43,10 @@ git clone https://github.com/thomasfricke/container-hardening.git
 ```
 
     Klone nach 'container-hardening' ...
-    remote: Enumerating objects: 7, done.[K
-    remote: Counting objects: 100% (7/7), done.[K
-    remote: Compressing objects: 100% (7/7), done.[K
-    remote: Total 7 (delta 0), reused 4 (delta 0), pack-reused 0[K
+    remote: Enumerating objects: 7, done.
+    remote: Counting objects: 100% (7/7), done.
+    remote: Compressing objects: 100% (7/7), done.
+    remote: Total 7 (delta 0), reused 4 (delta 0), pack-reused 0
     Entpacke Objekte: 100% (7/7), 2.11 KiB | 1.05 MiB/s, fertig.
 
 
@@ -473,233 +473,233 @@ tar tf extract-hard.tar | grep -E '(^|.*nginx.*)'
 
 
 ```bash
-docker inspect extract-hard | jq
+docker inspect extract-hard | jq 
 ```
 
-    [1;39m[
-      [1;39m{
-        [0m[34;1m"Id"[0m[1;39m: [0m[0;32m"606f1dc93b4ac2f28eac7aafb780d5ce7c415849d2e85cd760c25a61cb6eed81"[0m[1;39m,
-        [0m[34;1m"Created"[0m[1;39m: [0m[0;32m"2021-12-09T11:08:52.432727723Z"[0m[1;39m,
-        [0m[34;1m"Path"[0m[1;39m: [0m[0;32m"/usr/sbin/nginx"[0m[1;39m,
-        [0m[34;1m"Args"[0m[1;39m: [0m[1;39m[
-          [0;32m"-g"[0m[1;39m,
-          [0;32m"daemon off;"[0m[1;39m
-        [1;39m][0m[1;39m,
-        [0m[34;1m"State"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"Status"[0m[1;39m: [0m[0;32m"running"[0m[1;39m,
-          [0m[34;1m"Running"[0m[1;39m: [0m[0;39mtrue[0m[1;39m,
-          [0m[34;1m"Paused"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-          [0m[34;1m"Restarting"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-          [0m[34;1m"OOMKilled"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-          [0m[34;1m"Dead"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-          [0m[34;1m"Pid"[0m[1;39m: [0m[0;39m3029366[0m[1;39m,
-          [0m[34;1m"ExitCode"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"Error"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-          [0m[34;1m"StartedAt"[0m[1;39m: [0m[0;32m"2021-12-09T11:08:52.814929369Z"[0m[1;39m,
-          [0m[34;1m"FinishedAt"[0m[1;39m: [0m[0;32m"0001-01-01T00:00:00Z"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"Image"[0m[1;39m: [0m[0;32m"sha256:d19cb6d843546165a0b6a18bcf271c21ffb021ceb0bf25b1694568ae6c40f1a6"[0m[1;39m,
-        [0m[34;1m"ResolvConfPath"[0m[1;39m: [0m[0;32m"/var/lib/docker/containers/606f1dc93b4ac2f28eac7aafb780d5ce7c415849d2e85cd760c25a61cb6eed81/resolv.conf"[0m[1;39m,
-        [0m[34;1m"HostnamePath"[0m[1;39m: [0m[0;32m"/var/lib/docker/containers/606f1dc93b4ac2f28eac7aafb780d5ce7c415849d2e85cd760c25a61cb6eed81/hostname"[0m[1;39m,
-        [0m[34;1m"HostsPath"[0m[1;39m: [0m[0;32m"/var/lib/docker/containers/606f1dc93b4ac2f28eac7aafb780d5ce7c415849d2e85cd760c25a61cb6eed81/hosts"[0m[1;39m,
-        [0m[34;1m"LogPath"[0m[1;39m: [0m[0;32m"/var/lib/docker/containers/606f1dc93b4ac2f28eac7aafb780d5ce7c415849d2e85cd760c25a61cb6eed81/606f1dc93b4ac2f28eac7aafb780d5ce7c415849d2e85cd760c25a61cb6eed81-json.log"[0m[1;39m,
-        [0m[34;1m"Name"[0m[1;39m: [0m[0;32m"/extract-hard"[0m[1;39m,
-        [0m[34;1m"RestartCount"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-        [0m[34;1m"Driver"[0m[1;39m: [0m[0;32m"overlay2"[0m[1;39m,
-        [0m[34;1m"Platform"[0m[1;39m: [0m[0;32m"linux"[0m[1;39m,
-        [0m[34;1m"MountLabel"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-        [0m[34;1m"ProcessLabel"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-        [0m[34;1m"AppArmorProfile"[0m[1;39m: [0m[0;32m"docker-default"[0m[1;39m,
-        [0m[34;1m"ExecIDs"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-        [0m[34;1m"HostConfig"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"Binds"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"ContainerIDFile"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-          [0m[34;1m"LogConfig"[0m[1;39m: [0m[1;39m{
-            [0m[34;1m"Type"[0m[1;39m: [0m[0;32m"json-file"[0m[1;39m,
-            [0m[34;1m"Config"[0m[1;39m: [0m[1;39m{}[0m[1;39m
-          [1;39m}[0m[1;39m,
-          [0m[34;1m"NetworkMode"[0m[1;39m: [0m[0;32m"default"[0m[1;39m,
-          [0m[34;1m"PortBindings"[0m[1;39m: [0m[1;39m{
-            [0m[34;1m"80/tcp"[0m[1;39m: [0m[1;39m[
-              [1;39m{
-                [0m[34;1m"HostIp"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-                [0m[34;1m"HostPort"[0m[1;39m: [0m[0;32m"10080"[0m[1;39m
-              [1;39m}[0m[1;39m
-            [1;39m][0m[1;39m
-          [1;39m}[0m[1;39m,
-          [0m[34;1m"RestartPolicy"[0m[1;39m: [0m[1;39m{
-            [0m[34;1m"Name"[0m[1;39m: [0m[0;32m"no"[0m[1;39m,
-            [0m[34;1m"MaximumRetryCount"[0m[1;39m: [0m[0;39m0[0m[1;39m
-          [1;39m}[0m[1;39m,
-          [0m[34;1m"AutoRemove"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-          [0m[34;1m"VolumeDriver"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-          [0m[34;1m"VolumesFrom"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"CapAdd"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"CapDrop"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"CgroupnsMode"[0m[1;39m: [0m[0;32m"host"[0m[1;39m,
-          [0m[34;1m"Dns"[0m[1;39m: [0m[1;39m[][0m[1;39m,
-          [0m[34;1m"DnsOptions"[0m[1;39m: [0m[1;39m[][0m[1;39m,
-          [0m[34;1m"DnsSearch"[0m[1;39m: [0m[1;39m[][0m[1;39m,
-          [0m[34;1m"ExtraHosts"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"GroupAdd"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"IpcMode"[0m[1;39m: [0m[0;32m"private"[0m[1;39m,
-          [0m[34;1m"Cgroup"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-          [0m[34;1m"Links"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"OomScoreAdj"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"PidMode"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-          [0m[34;1m"Privileged"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-          [0m[34;1m"PublishAllPorts"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-          [0m[34;1m"ReadonlyRootfs"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-          [0m[34;1m"SecurityOpt"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"UTSMode"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-          [0m[34;1m"UsernsMode"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-          [0m[34;1m"ShmSize"[0m[1;39m: [0m[0;39m67108864[0m[1;39m,
-          [0m[34;1m"Runtime"[0m[1;39m: [0m[0;32m"runc"[0m[1;39m,
-          [0m[34;1m"ConsoleSize"[0m[1;39m: [0m[1;39m[
-            [0;39m0[0m[1;39m,
-            [0;39m0[0m[1;39m
-          [1;39m][0m[1;39m,
-          [0m[34;1m"Isolation"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-          [0m[34;1m"CpuShares"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"Memory"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"NanoCpus"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"CgroupParent"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-          [0m[34;1m"BlkioWeight"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"BlkioWeightDevice"[0m[1;39m: [0m[1;39m[][0m[1;39m,
-          [0m[34;1m"BlkioDeviceReadBps"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"BlkioDeviceWriteBps"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"BlkioDeviceReadIOps"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"BlkioDeviceWriteIOps"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"CpuPeriod"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"CpuQuota"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"CpuRealtimePeriod"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"CpuRealtimeRuntime"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"CpusetCpus"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-          [0m[34;1m"CpusetMems"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-          [0m[34;1m"Devices"[0m[1;39m: [0m[1;39m[][0m[1;39m,
-          [0m[34;1m"DeviceCgroupRules"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"DeviceRequests"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"KernelMemory"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"KernelMemoryTCP"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"MemoryReservation"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"MemorySwap"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"MemorySwappiness"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"OomKillDisable"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-          [0m[34;1m"PidsLimit"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"Ulimits"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"CpuCount"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"CpuPercent"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"IOMaximumIOps"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"IOMaximumBandwidth"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"MaskedPaths"[0m[1;39m: [0m[1;39m[
-            [0;32m"/proc/asound"[0m[1;39m,
-            [0;32m"/proc/acpi"[0m[1;39m,
-            [0;32m"/proc/kcore"[0m[1;39m,
-            [0;32m"/proc/keys"[0m[1;39m,
-            [0;32m"/proc/latency_stats"[0m[1;39m,
-            [0;32m"/proc/timer_list"[0m[1;39m,
-            [0;32m"/proc/timer_stats"[0m[1;39m,
-            [0;32m"/proc/sched_debug"[0m[1;39m,
-            [0;32m"/proc/scsi"[0m[1;39m,
-            [0;32m"/sys/firmware"[0m[1;39m
-          [1;39m][0m[1;39m,
-          [0m[34;1m"ReadonlyPaths"[0m[1;39m: [0m[1;39m[
-            [0;32m"/proc/bus"[0m[1;39m,
-            [0;32m"/proc/fs"[0m[1;39m,
-            [0;32m"/proc/irq"[0m[1;39m,
-            [0;32m"/proc/sys"[0m[1;39m,
-            [0;32m"/proc/sysrq-trigger"[0m[1;39m
-          [1;39m][0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"GraphDriver"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"Data"[0m[1;39m: [0m[1;39m{
-            [0m[34;1m"LowerDir"[0m[1;39m: [0m[0;32m"/var/lib/docker/overlay2/dfa9ad23a46e4ed2b935892b8f0e3454d193b08f2cadecff21cd4326e4a5fa9b-init/diff:/var/lib/docker/overlay2/bb903b701c4288d1c9053dd63d69d59a3a4484230f1c7da9426f83ca60b47f13/diff"[0m[1;39m,
-            [0m[34;1m"MergedDir"[0m[1;39m: [0m[0;32m"/var/lib/docker/overlay2/dfa9ad23a46e4ed2b935892b8f0e3454d193b08f2cadecff21cd4326e4a5fa9b/merged"[0m[1;39m,
-            [0m[34;1m"UpperDir"[0m[1;39m: [0m[0;32m"/var/lib/docker/overlay2/dfa9ad23a46e4ed2b935892b8f0e3454d193b08f2cadecff21cd4326e4a5fa9b/diff"[0m[1;39m,
-            [0m[34;1m"WorkDir"[0m[1;39m: [0m[0;32m"/var/lib/docker/overlay2/dfa9ad23a46e4ed2b935892b8f0e3454d193b08f2cadecff21cd4326e4a5fa9b/work"[0m[1;39m
-          [1;39m}[0m[1;39m,
-          [0m[34;1m"Name"[0m[1;39m: [0m[0;32m"overlay2"[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"Mounts"[0m[1;39m: [0m[1;39m[][0m[1;39m,
-        [0m[34;1m"Config"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"Hostname"[0m[1;39m: [0m[0;32m"606f1dc93b4a"[0m[1;39m,
-          [0m[34;1m"Domainname"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-          [0m[34;1m"User"[0m[1;39m: [0m[0;32m"101:101"[0m[1;39m,
-          [0m[34;1m"AttachStdin"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-          [0m[34;1m"AttachStdout"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-          [0m[34;1m"AttachStderr"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-          [0m[34;1m"ExposedPorts"[0m[1;39m: [0m[1;39m{
-            [0m[34;1m"3000/tcp"[0m[1;39m: [0m[1;39m{}[0m[1;39m,
-            [0m[34;1m"80/tcp"[0m[1;39m: [0m[1;39m{}[0m[1;39m
-          [1;39m}[0m[1;39m,
-          [0m[34;1m"Tty"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-          [0m[34;1m"OpenStdin"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-          [0m[34;1m"StdinOnce"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-          [0m[34;1m"Env"[0m[1;39m: [0m[1;39m[
-            [0;32m"PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"[0m[1;39m
-          [1;39m][0m[1;39m,
-          [0m[34;1m"Cmd"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"Image"[0m[1;39m: [0m[0;32m"extract-hard"[0m[1;39m,
-          [0m[34;1m"Volumes"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"WorkingDir"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-          [0m[34;1m"Entrypoint"[0m[1;39m: [0m[1;39m[
-            [0;32m"/usr/sbin/nginx"[0m[1;39m,
-            [0;32m"-g"[0m[1;39m,
-            [0;32m"daemon off;"[0m[1;39m
-          [1;39m][0m[1;39m,
-          [0m[34;1m"OnBuild"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"Labels"[0m[1;39m: [0m[1;39m{}[0m[1;39m
-        [1;39m}[0m[1;39m,
-        [0m[34;1m"NetworkSettings"[0m[1;39m: [0m[1;39m{
-          [0m[34;1m"Bridge"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-          [0m[34;1m"SandboxID"[0m[1;39m: [0m[0;32m"c3d53e2ac88856e88e26a021be1f0b4e15d2f36bbd3c8d0133ae4c8ac301960a"[0m[1;39m,
-          [0m[34;1m"HairpinMode"[0m[1;39m: [0m[0;39mfalse[0m[1;39m,
-          [0m[34;1m"LinkLocalIPv6Address"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-          [0m[34;1m"LinkLocalIPv6PrefixLen"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"Ports"[0m[1;39m: [0m[1;39m{
-            [0m[34;1m"3000/tcp"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-            [0m[34;1m"80/tcp"[0m[1;39m: [0m[1;39m[
-              [1;39m{
-                [0m[34;1m"HostIp"[0m[1;39m: [0m[0;32m"0.0.0.0"[0m[1;39m,
-                [0m[34;1m"HostPort"[0m[1;39m: [0m[0;32m"10080"[0m[1;39m
-              [1;39m}[0m[1;39m,
-              [1;39m{
-                [0m[34;1m"HostIp"[0m[1;39m: [0m[0;32m"::"[0m[1;39m,
-                [0m[34;1m"HostPort"[0m[1;39m: [0m[0;32m"10080"[0m[1;39m
-              [1;39m}[0m[1;39m
-            [1;39m][0m[1;39m
-          [1;39m}[0m[1;39m,
-          [0m[34;1m"SandboxKey"[0m[1;39m: [0m[0;32m"/var/run/docker/netns/c3d53e2ac888"[0m[1;39m,
-          [0m[34;1m"SecondaryIPAddresses"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"SecondaryIPv6Addresses"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-          [0m[34;1m"EndpointID"[0m[1;39m: [0m[0;32m"6a89e5eabed28d033b94fe6d7a4a0eb456df2c5147049b85a5287d8457626ca2"[0m[1;39m,
-          [0m[34;1m"Gateway"[0m[1;39m: [0m[0;32m"172.26.0.1"[0m[1;39m,
-          [0m[34;1m"GlobalIPv6Address"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-          [0m[34;1m"GlobalIPv6PrefixLen"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-          [0m[34;1m"IPAddress"[0m[1;39m: [0m[0;32m"172.26.0.5"[0m[1;39m,
-          [0m[34;1m"IPPrefixLen"[0m[1;39m: [0m[0;39m16[0m[1;39m,
-          [0m[34;1m"IPv6Gateway"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-          [0m[34;1m"MacAddress"[0m[1;39m: [0m[0;32m"02:42:ac:1a:00:05"[0m[1;39m,
-          [0m[34;1m"Networks"[0m[1;39m: [0m[1;39m{
-            [0m[34;1m"bridge"[0m[1;39m: [0m[1;39m{
-              [0m[34;1m"IPAMConfig"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-              [0m[34;1m"Links"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-              [0m[34;1m"Aliases"[0m[1;39m: [0m[1;30mnull[0m[1;39m,
-              [0m[34;1m"NetworkID"[0m[1;39m: [0m[0;32m"24dcbba0a149182d3afd11c92333571fb791302e1db9f8f109d5adabc7361a37"[0m[1;39m,
-              [0m[34;1m"EndpointID"[0m[1;39m: [0m[0;32m"6a89e5eabed28d033b94fe6d7a4a0eb456df2c5147049b85a5287d8457626ca2"[0m[1;39m,
-              [0m[34;1m"Gateway"[0m[1;39m: [0m[0;32m"172.26.0.1"[0m[1;39m,
-              [0m[34;1m"IPAddress"[0m[1;39m: [0m[0;32m"172.26.0.5"[0m[1;39m,
-              [0m[34;1m"IPPrefixLen"[0m[1;39m: [0m[0;39m16[0m[1;39m,
-              [0m[34;1m"IPv6Gateway"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-              [0m[34;1m"GlobalIPv6Address"[0m[1;39m: [0m[0;32m""[0m[1;39m,
-              [0m[34;1m"GlobalIPv6PrefixLen"[0m[1;39m: [0m[0;39m0[0m[1;39m,
-              [0m[34;1m"MacAddress"[0m[1;39m: [0m[0;32m"02:42:ac:1a:00:05"[0m[1;39m,
-              [0m[34;1m"DriverOpts"[0m[1;39m: [0m[1;30mnull[0m[1;39m
-            [1;39m}[0m[1;39m
-          [1;39m}[0m[1;39m
-        [1;39m}[0m[1;39m
-      [1;39m}[0m[1;39m
-    [1;39m][0m
+    [
+      {
+        "Id": "606f1dc93b4ac2f28eac7aafb780d5ce7c415849d2e85cd760c25a61cb6eed81",
+        "Created": "2021-12-09T11:08:52.432727723Z",
+        "Path": "/usr/sbin/nginx",
+        "Args": [
+          "-g",
+          "daemon off;"
+        ],
+        "State": {
+          "Status": "running",
+          "Running": true,
+          "Paused": false,
+          "Restarting": false,
+          "OOMKilled": false,
+          "Dead": false,
+          "Pid": 3029366,
+          "ExitCode": 0,
+          "Error": "",
+          "StartedAt": "2021-12-09T11:08:52.814929369Z",
+          "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:d19cb6d843546165a0b6a18bcf271c21ffb021ceb0bf25b1694568ae6c40f1a6",
+        "ResolvConfPath": "/var/lib/docker/containers/606f1dc93b4ac2f28eac7aafb780d5ce7c415849d2e85cd760c25a61cb6eed81/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/606f1dc93b4ac2f28eac7aafb780d5ce7c415849d2e85cd760c25a61cb6eed81/hostname",
+        "HostsPath": "/var/lib/docker/containers/606f1dc93b4ac2f28eac7aafb780d5ce7c415849d2e85cd760c25a61cb6eed81/hosts",
+        "LogPath": "/var/lib/docker/containers/606f1dc93b4ac2f28eac7aafb780d5ce7c415849d2e85cd760c25a61cb6eed81/606f1dc93b4ac2f28eac7aafb780d5ce7c415849d2e85cd760c25a61cb6eed81-json.log",
+        "Name": "/extract-hard",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "docker-default",
+        "ExecIDs": null,
+        "HostConfig": {
+          "Binds": null,
+          "ContainerIDFile": "",
+          "LogConfig": {
+            "Type": "json-file",
+            "Config": {}
+          },
+          "NetworkMode": "default",
+          "PortBindings": {
+            "80/tcp": [
+              {
+                "HostIp": "",
+                "HostPort": "10080"
+              }
+            ]
+          },
+          "RestartPolicy": {
+            "Name": "no",
+            "MaximumRetryCount": 0
+          },
+          "AutoRemove": false,
+          "VolumeDriver": "",
+          "VolumesFrom": null,
+          "CapAdd": null,
+          "CapDrop": null,
+          "CgroupnsMode": "host",
+          "Dns": [],
+          "DnsOptions": [],
+          "DnsSearch": [],
+          "ExtraHosts": null,
+          "GroupAdd": null,
+          "IpcMode": "private",
+          "Cgroup": "",
+          "Links": null,
+          "OomScoreAdj": 0,
+          "PidMode": "",
+          "Privileged": false,
+          "PublishAllPorts": false,
+          "ReadonlyRootfs": false,
+          "SecurityOpt": null,
+          "UTSMode": "",
+          "UsernsMode": "",
+          "ShmSize": 67108864,
+          "Runtime": "runc",
+          "ConsoleSize": [
+            0,
+            0
+          ],
+          "Isolation": "",
+          "CpuShares": 0,
+          "Memory": 0,
+          "NanoCpus": 0,
+          "CgroupParent": "",
+          "BlkioWeight": 0,
+          "BlkioWeightDevice": [],
+          "BlkioDeviceReadBps": null,
+          "BlkioDeviceWriteBps": null,
+          "BlkioDeviceReadIOps": null,
+          "BlkioDeviceWriteIOps": null,
+          "CpuPeriod": 0,
+          "CpuQuota": 0,
+          "CpuRealtimePeriod": 0,
+          "CpuRealtimeRuntime": 0,
+          "CpusetCpus": "",
+          "CpusetMems": "",
+          "Devices": [],
+          "DeviceCgroupRules": null,
+          "DeviceRequests": null,
+          "KernelMemory": 0,
+          "KernelMemoryTCP": 0,
+          "MemoryReservation": 0,
+          "MemorySwap": 0,
+          "MemorySwappiness": null,
+          "OomKillDisable": false,
+          "PidsLimit": null,
+          "Ulimits": null,
+          "CpuCount": 0,
+          "CpuPercent": 0,
+          "IOMaximumIOps": 0,
+          "IOMaximumBandwidth": 0,
+          "MaskedPaths": [
+            "/proc/asound",
+            "/proc/acpi",
+            "/proc/kcore",
+            "/proc/keys",
+            "/proc/latency_stats",
+            "/proc/timer_list",
+            "/proc/timer_stats",
+            "/proc/sched_debug",
+            "/proc/scsi",
+            "/sys/firmware"
+          ],
+          "ReadonlyPaths": [
+            "/proc/bus",
+            "/proc/fs",
+            "/proc/irq",
+            "/proc/sys",
+            "/proc/sysrq-trigger"
+          ]
+        },
+        "GraphDriver": {
+          "Data": {
+            "LowerDir": "/var/lib/docker/overlay2/dfa9ad23a46e4ed2b935892b8f0e3454d193b08f2cadecff21cd4326e4a5fa9b-init/diff:/var/lib/docker/overlay2/bb903b701c4288d1c9053dd63d69d59a3a4484230f1c7da9426f83ca60b47f13/diff",
+            "MergedDir": "/var/lib/docker/overlay2/dfa9ad23a46e4ed2b935892b8f0e3454d193b08f2cadecff21cd4326e4a5fa9b/merged",
+            "UpperDir": "/var/lib/docker/overlay2/dfa9ad23a46e4ed2b935892b8f0e3454d193b08f2cadecff21cd4326e4a5fa9b/diff",
+            "WorkDir": "/var/lib/docker/overlay2/dfa9ad23a46e4ed2b935892b8f0e3454d193b08f2cadecff21cd4326e4a5fa9b/work"
+          },
+          "Name": "overlay2"
+        },
+        "Mounts": [],
+        "Config": {
+          "Hostname": "606f1dc93b4a",
+          "Domainname": "",
+          "User": "101:101",
+          "AttachStdin": false,
+          "AttachStdout": false,
+          "AttachStderr": false,
+          "ExposedPorts": {
+            "3000/tcp": {},
+            "80/tcp": {}
+          },
+          "Tty": false,
+          "OpenStdin": false,
+          "StdinOnce": false,
+          "Env": [
+            "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+          ],
+          "Cmd": null,
+          "Image": "extract-hard",
+          "Volumes": null,
+          "WorkingDir": "",
+          "Entrypoint": [
+            "/usr/sbin/nginx",
+            "-g",
+            "daemon off;"
+          ],
+          "OnBuild": null,
+          "Labels": {}
+        },
+        "NetworkSettings": {
+          "Bridge": "",
+          "SandboxID": "c3d53e2ac88856e88e26a021be1f0b4e15d2f36bbd3c8d0133ae4c8ac301960a",
+          "HairpinMode": false,
+          "LinkLocalIPv6Address": "",
+          "LinkLocalIPv6PrefixLen": 0,
+          "Ports": {
+            "3000/tcp": null,
+            "80/tcp": [
+              {
+                "HostIp": "0.0.0.0",
+                "HostPort": "10080"
+              },
+              {
+                "HostIp": "::",
+                "HostPort": "10080"
+              }
+            ]
+          },
+          "SandboxKey": "/var/run/docker/netns/c3d53e2ac888",
+          "SecondaryIPAddresses": null,
+          "SecondaryIPv6Addresses": null,
+          "EndpointID": "6a89e5eabed28d033b94fe6d7a4a0eb456df2c5147049b85a5287d8457626ca2",
+          "Gateway": "172.26.0.1",
+          "GlobalIPv6Address": "",
+          "GlobalIPv6PrefixLen": 0,
+          "IPAddress": "172.26.0.5",
+          "IPPrefixLen": 16,
+          "IPv6Gateway": "",
+          "MacAddress": "02:42:ac:1a:00:05",
+          "Networks": {
+            "bridge": {
+              "IPAMConfig": null,
+              "Links": null,
+              "Aliases": null,
+              "NetworkID": "24dcbba0a149182d3afd11c92333571fb791302e1db9f8f109d5adabc7361a37",
+              "EndpointID": "6a89e5eabed28d033b94fe6d7a4a0eb456df2c5147049b85a5287d8457626ca2",
+              "Gateway": "172.26.0.1",
+              "IPAddress": "172.26.0.5",
+              "IPPrefixLen": 16,
+              "IPv6Gateway": "",
+              "GlobalIPv6Address": "",
+              "GlobalIPv6PrefixLen": 0,
+              "MacAddress": "02:42:ac:1a:00:05",
+              "DriverOpts": null
+            }
+          }
+        }
+      }
+    ]
 
 
 
