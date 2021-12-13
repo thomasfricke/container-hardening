@@ -1,4 +1,11 @@
 
+#
+# License
+#
+# GNU Affero General Public License Version 3.0, https://www.gnu.org/licenses/agpl-3.0.en.html
+#
+
+
 usage(){
    echo 'harden -d <dynamically linked> -f <files and dirs> -r <files to remove> -u user <files to chown to user>' 
 }
