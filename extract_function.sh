@@ -1,8 +1,44 @@
 
+#
+# License
+#
+# GNU Affero General Public License Version 3.0, https://www.gnu.org/licenses/agpl-3.0.en.html
+#
+
+
 usage(){
-   echo 'extract -d <dynamically linked> -f <files and dirs> -r <files to remove> -u user <files to chown to user>' 
+
+cat <<EOF
+$0 [-x] -d <dynamically linked> -f <files and dirs> -r <files to remove> -u user <files to chown to user> -c <chmod to be world writable>" 
+      -x Activates debugging
+      -d Files are considered dynamically linked
+         All library dependencies are resolved using ldd and necessary file are included
+      -f Files and directories to include. Don't forget the license files
+      -r Files to be removed before copying, especially log files
+      -u User:Group files should be chowned to, access right will be set to rw for the user
+      -c chmod go+rw to all the files in this section
+
+      The container needs a usable version of sh, ldd, sed, rm and uniq
+      
+      License is GNU Affero General Public License Version 3.0, https://www.gnu.org/licenses/agpl-3.0.en.html
+EOF
+
 }
 
+create_dir(){
+  HARDEN=/tmp/harden
+  mkdir -p $HARDEN
+
+  for i in $*
+  do
+    DIR=$HARDEN/$(dirname $i)
+   
+    mkdir -p "$DIR"
+    cp -a "$i" $HARDEN/$i 
+    
+
+  done
+}
 
 next_section(){
   [ $# -gt 0 ] && [ `echo $1 | head -c 1` != '-' ] && return 0
@@ -76,7 +112,7 @@ extract(){
       done
       ;;
 
-    -u)  # change owner and grand access    
+    -u)  # change owner and grant access    
       shift
       OWNER=$1
       shift
@@ -87,7 +123,16 @@ extract(){
         shift
       done
       ;;
-    
+
+   -c) # make world writeable
+      shift
+      while next_section $*
+      do
+        chmod -R go+rw $1
+        shift
+      done
+      ;;
+
     *) # error, show usage 
     
       usage
@@ -97,3 +142,7 @@ extract(){
   done  | uniq | sed 's+^/++'
 }
 
+if [ "$0" = "harden" ]
+then
+  extract $*
+fi
