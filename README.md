@@ -24,6 +24,8 @@ COPY --from=origin /tmp/harden/ /
 
 ENTRYPOINT ["/usr/sbin/nginx","-g","daemon off;"]
 
+```
+
 The usage 
 
 ```bash
