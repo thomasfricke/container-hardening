@@ -18,6 +18,12 @@ create_tar_command(){
   echo tar cf /dev/stdout -C / \$\(extract  $* \) 
 }
 
+create_dir_command(){
+  cat extract_function.sh
+  echo create_dir / \$\(extract  $* \) 
+}
+
+
 #
 # creates a Dockerfile inspecting the running container
 #
@@ -31,8 +37,15 @@ create_dockerfile(){
 
   #docker inspect --format "USER {{.Config.User}}"  static | cut -d: -f1
 
-  docker inspect --format "WORKDIR {{.Config.WorkingDir}}" $CONTAINER
-  docker inspect --format "ENTRYPOINT {{json .Config.Entrypoint}}"  $CONTAINER
+  WORKDIR=$(docker inspect --format "WORKDIR {{.Config.WorkingDir}}" $CONTAINER)
+  if [ "$WORKDIR" = "WORKDIR" ] 
+  then
+    echo $WORKDIR
+  fi
+
+  docker inspect --format "ENTRYPOINT {{json .Args}}" $CONTAINER
+ 
+  # docker inspect --format "ENTRYPOINT {{json .Config.Entrypoint}}"  $CONTAINER
 }
 
 if [ "$#" -eq "0" ] 

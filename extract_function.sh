@@ -1,8 +1,22 @@
 
 usage(){
-   echo 'extract -d <dynamically linked> -f <files and dirs> -r <files to remove> -u user <files to chown to user>' 
+   echo 'harden -d <dynamically linked> -f <files and dirs> -r <files to remove> -u user <files to chown to user>' 
 }
 
+create_dir(){
+  HARDEN=/tmp/harden
+  mkdir -p $HARDEN
+
+  for i in $*
+  do
+    DIR=$HARDEN/$(dirname $i)
+   
+    mkdir -p "$DIR"
+    cp -a "$i" $HARDEN/$i 
+    
+
+  done
+}
 
 next_section(){
   [ $# -gt 0 ] && [ `echo $1 | head -c 1` != '-' ] && return 0
@@ -97,3 +111,7 @@ extract(){
   done  | uniq | sed 's+^/++'
 }
 
+if $0="harden"
+then
+  extract $*
+fi
