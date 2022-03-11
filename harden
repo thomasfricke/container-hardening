@@ -82,14 +82,14 @@ extract(){
     -d)     # dynamically linked executables
     
       shift
-      if next_section $*
-      then
+      while next_section $*
+      do
         for f in $(ldd "$1" | ldd_filter) $1
         do
           link_filter $f
         done
         shift
-      fi
+      done
       ;;
 
     -f) # files and links
