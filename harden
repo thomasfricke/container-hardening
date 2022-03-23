@@ -34,7 +34,7 @@ create_dir(){
     DIR=$HARDEN/$(dirname $i)
    
     mkdir -p "$DIR"
-    cp -a "$i" $HARDEN/$i 
+    [ -d $HARDEN/"$i" ] || cp -a "$i" $HARDEN/$i 
     
  done
 }
