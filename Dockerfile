@@ -1,4 +1,4 @@
-FROM nginx:alpine as origin
+FROM nginx:alpine AS origin
 
 ADD harden /harden
 

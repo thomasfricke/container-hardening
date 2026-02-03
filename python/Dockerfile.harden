@@ -1,0 +1,18 @@
+FROM python:3.14.2-alpine3.23 AS origin
+
+ADD harden /harden
+
+RUN mkdir /tmp/harden
+
+WORKDIR /
+
+RUN /harden -x -d /usr/local/bin/python3 \
+             -f /app /usr/local/lib -d /usr/local/lib/python3.14/lib-dynload/binascii.cpython-314-x86_64-linux-musl.so
+
+
+FROM scratch
+
+COPY --from=origin /tmp/harden/ /
+
+CMD ["/usr/local/bin/python3", "-m", "http.server"]
+
