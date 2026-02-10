@@ -1,14 +1,13 @@
-
+#!/bin/sh
 #
 # License
 #
 # GNU Affero General Public License Version 3.0, https://www.gnu.org/licenses/agpl-3.0.en.html
 #
 
+usage() {
 
-usage(){
-
-cat <<EOF
+  cat <<EOF
 $0 [-x] -d <dynamically linked> -f <files and dirs> -r <files to remove> -u user <files to chown to user> -c <chmod to be world writable>" 
       -x Activates debugging
       -d Files are considered dynamically linked
@@ -25,121 +24,119 @@ EOF
 
 }
 
-create_dir(){
+create_dir() {
   HARDEN=/tmp/harden
   mkdir -p $HARDEN
 
-  for i in $*
-  do
-    DIR=$HARDEN/$(dirname $i)
-   
-    mkdir -p "$DIR"
-    [ -d $HARDEN/"$i" ] || cp -a "$i" $HARDEN/$i 
-    
- done
+  DIR=$HARDEN/$(dirname "$1")
+
+  mkdir -p "$DIR"
+  [ -d "$HARDEN/$1" ] || cp -a "$1" "$HARDEN/$1"
+
 }
 
-next_section(){
-  [ $# -gt 0 ] && [ `echo $1 | head -c 1` != '-' ] && return 0
-  return 1
+first_char() {
+  printf %.1s "$1"
 }
 
-ldd_filter(){
-  sed 's+\t*++' |\
-  sed 's+.*=>\ ++' |\
-  sed 's+\ .*$++'
+next_section() {
+  [ $# -gt 0 ] && [ "$(first_char "$1")" != '-' ]
 }
 
-link_filter(){
-  for f in $(find "$1")
-  do
-    echo $f
-    if [ -L $f ] 
-      then
-        LINK=$(readlink $f) 
-        if [ `echo $LINK | head -c 1` = '/' ]
-        then
-          echo $LINK
-        else
-          echo $(dirname $f)/$(readlink $f)
-        fi
-     fi
-   done
+ldd_filter() {
+  sed 's+\t*++' \
+    | sed 's+.*=>\ ++' \
+    | sed 's+\ .*$++'
 }
 
+link_filter() {
+  find "$1" ! -name "$(printf "*\n*")" >link_filter.tmp
+  while IFS= read -r f; do
+    echo "$f"
+    if [ -L "$f" ]; then
+      LINK=$(readlink "$f")
+      if [ "$(first_char "$LINK")" = '/' ]; then
+        echo "$LINK"
+      else
+        echo "$(dirname "$f")/$LINK"
+      fi
+    fi
+  done <link_filter.tmp
+  rm link_filter.tmp
+}
 
-extract(){
+extract() {
 
-  while [ $# -ne 0 ]
-  do	  
+  while [ $# -ne 0 ]; do
     case $1 in
-    -x) # enable debugging
+      -x) # enable debugging
 
-      set -x 
-      shift
-      ;;
+        set -x
+        shift
+        ;;
 
-    -d)     # dynamically linked executables
-    
-      shift
-      while next_section $*
-      do
-        for f in $(ldd "$1" | ldd_filter) $1
-        do
-          link_filter $f
+      -d) # dynamically linked executables
+
+        shift
+        while next_section "$@"; do
+          for f in $(ldd "$1" | ldd_filter) $1; do
+            link_filter "$f"
+          done
+          shift
         done
-        shift
-      done
-      ;;
+        ;;
 
-    -f) # files and links
-    
-      shift
-      while next_section $*
-      do
-        link_filter $1
-        shift
-      done
-      ;;
+      -f) # files and links
 
-    -r) # files to remove
-      shift
-      while next_section $*
-      do
-        rm $1
         shift
-      done
-      ;;
+        while next_section "$@"; do
+          link_filter "$1"
+          shift
+        done
+        ;;
 
-    -u)  # change owner and grant access    
-      shift
-      OWNER=$1
-      shift
-      while next_section $*
-      do
-        chown $OWNER $1
-        chmod -R +rw $1
+      -r) # files to remove
         shift
-      done
-      ;;
+        while next_section "$@"; do
+          rm "$1"
+          shift
+        done
+        ;;
 
-   -c) # make world writeable
-      shift
-      while next_section $*
-      do
-        chmod -R go+rw $1
+      -u) # change owner and grant access
         shift
-      done
-      ;;
+        OWNER=$1
+        shift
+        while next_section "$@"; do
+          chown "$OWNER" "$1"
+          chmod -R +rw "$1"
+          shift
+        done
+        ;;
 
-    *) # error, show usage 
-    
-      usage
-      exit 1
-      ;;
+      -c) # make world writeable
+        shift
+        while next_section "$@"; do
+          chmod -R go+rw "$1"
+          shift
+        done
+        ;;
+
+      *) # error, show usage
+
+        usage
+        exit 1
+        ;;
     esac
-  done  | uniq | sed 's+^/++'
+  done | uniq | sed 's+^/++'
 }
 
+main() {
+  extract "$@" >extract.tmp
+  while IFS= read -r f; do
+    create_dir "$f"
+  done <extract.tmp
+  rm extract.tmp
+}
 
-create_dir $(extract $*)
+main "$@"
